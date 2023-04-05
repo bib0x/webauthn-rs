@@ -392,8 +392,8 @@ pub(crate) fn verify_packed_attestation(
     //    cbor_try_map!(att_stmt).map_err(|_| WebauthnError::AttestationStatementMapInvalid)?;
     let att_stmt_map = match att_stmt {
         serde_cbor::Value::Map(m) => Ok(m),
-        Err(e) => {
-            println!("{?}", e);
+        _ => {
+            println!("{:?}", e);
             return Err(WebauthnError::AttestationStatementMapInvalid);
         }
     };
