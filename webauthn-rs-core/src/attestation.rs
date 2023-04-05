@@ -388,15 +388,15 @@ pub(crate) fn verify_packed_attestation(
     let auth_data_bytes = &att_obj.auth_data_bytes;
 
     // 1. Verify that attStmt is valid CBOR conforming to the syntax defined above and perform CBOR decoding on it to extract the contained fields
-    //let att_stmt_map =
-    //    cbor_try_map!(att_stmt).map_err(|_| WebauthnError::AttestationStatementMapInvalid)?;
-    let att_stmt_map = match att_stmt {
-        serde_cbor::Value::Map(m) => Ok(m),
-        _ => {
-            println!("{:?}", att_stmt);
-            return Err(WebauthnError::AttestationStatementMapInvalid);
-        }
-    };
+    let att_stmt_map =
+        cbor_try_map!(att_stmt).map_err(|_| WebauthnError::AttestationStatementMapInvalid)?;
+    // let att_stmt_map = match att_stmt {
+    //     serde_cbor::Value::Map(m) => Ok(m),
+    //     _ => {
+    //         println!("{:?}", att_stmt);
+    //         return Err(WebauthnError::AttestationStatementMapInvalid);
+    //     }
+    // };
 
     let x5c_key = &serde_cbor::Value::Text("x5c".to_string());
     let ecdaa_key_id_key = &serde_cbor::Value::Text("ecdaaKeyId".to_string());
