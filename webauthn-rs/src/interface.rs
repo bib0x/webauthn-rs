@@ -1,3 +1,4 @@
+#![warn(warnings)]
 //! Types that are expected to be serialised in applications using [crate::Webauthn]
 
 use serde::{Deserialize, Serialize};
@@ -253,7 +254,7 @@ impl From<Credential> for PasswordlessKey {
     derive(Serialize, Deserialize)
 )]
 pub struct SecurityKeyRegistration {
-    pub(crate) rs: RegistrationState,
+    pub rs: RegistrationState,
     pub(crate) ca_list: Option<AttestationCaList>,
 }
 
