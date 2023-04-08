@@ -374,8 +374,8 @@ impl WebauthnCore {
 
         // Verify that the value of C.challenge matches the challenge that was sent to the
         // authenticator in the create() call.
-        trace!("challenge.0 == {:x?}", data.client_data_json.challenge.0);
-        trace!("chal.as_ref == {:x?}", chal.as_ref());
+        println!("challenge.0 == {:x?}", data.client_data_json.challenge.0);
+        println!("chal.as_ref == {:x?}", chal.as_ref());
         if data.client_data_json.challenge.0 != chal.as_ref() {
             return Err(WebauthnError::MismatchedChallenge);
         }
