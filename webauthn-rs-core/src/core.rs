@@ -382,7 +382,10 @@ impl WebauthnCore {
 
         // Verify that the client's origin matches one of our allowed origins..
         if !self.allowed_origins.iter().any(|origin| {
-            println!("{:?}", origin);
+            println!("origin: {:?}", origin);
+            println!("allow_sb_o: {:?}", self.allow_subdomains_origin);
+            println!("allow_port: {:?}", self.allow_any_port);
+            println!("client_o: {:?}", &data.client_data_json.origin);
             Self::origins_match(
                 self.allow_subdomains_origin,
                 self.allow_any_port,
