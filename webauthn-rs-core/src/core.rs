@@ -367,8 +367,6 @@ impl WebauthnCore {
 
         let data = AuthenticatorAttestationResponse::try_from(&reg.response)?;
 
-        // trace!("data: {:?}", data);
-
         // Verify that the value of C.type is webauthn.create.
         if data.client_data_json.type_ != "webauthn.create" {
             return Err(WebauthnError::InvalidClientDataType);
@@ -376,6 +374,8 @@ impl WebauthnCore {
 
         // Verify that the value of C.challenge matches the challenge that was sent to the
         // authenticator in the create() call.
+        trace!("challenge.0 == {:x?}", data.client_data_json.challenge.0);
+        trace!("chal.as_ref == {:x?}", chal.as_ref());
         if data.client_data_json.challenge.0 != chal.as_ref() {
             return Err(WebauthnError::MismatchedChallenge);
         }
